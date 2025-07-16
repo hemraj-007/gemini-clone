@@ -2,33 +2,44 @@
 
 A modern, responsive chat application built with React, TypeScript, Vite, Zustand, and Tailwind CSS. Gemini allows users to authenticate via phone number and OTP, create and manage chatrooms, and exchange messages (including images) in a simulated chat environment.
 
-## Features
+**Live Demo:** [https://gemini-clone-delta-six.vercel.app/](https://gemini-clone-delta-six.vercel.app/)
 
-- **Phone Number Authentication**: Users log in using their phone number and a simulated OTP verification flow.
-- **Chatrooms**: Create, search, and delete chatrooms. Each chatroom is persistent via local storage.
-- **Messaging**: Send text and image messages within chatrooms. Messages are stored locally and persist across sessions.
-- **Simulated AI Responses**: The app simulates AI ("Gemini") responses to user messages for demo purposes.
-- **Theme Toggle**: Switch between light and dark mode. Theme preference is saved locally.
-- **Responsive UI**: Clean, modern interface styled with Tailwind CSS.
+---
 
-## Tech Stack
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Live Demo](#live-demo)
+- [Setup and Run Instructions](#setup-and-run-instructions)
+- [Folder/Component Structure](#foldercomponent-structure)
+- [Advanced Features](#advanced-features)
+- [Feature Implementation Table](#feature-implementation-table)
+- [Notes](#notes)
+- [License](#license)
 
-- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/) (build tool)
-- [Zustand](https://zustand-demo.pmnd.rs/) (state management)
-- [Tailwind CSS](https://tailwindcss.com/) (utility-first CSS framework)
-- [React Router](https://reactrouter.com/) (routing)
-- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) (form validation)
-- [React Hot Toast](https://react-hot-toast.com/) (notifications)
+---
 
-## Getting Started
+## Project Overview
+Gemini is a chat app demo with:
+- Phone number authentication (simulated OTP)
+- Chatroom creation, search, and deletion
+- Messaging (text and images) with simulated AI responses
+- Local persistence (no backend)
+- Responsive, modern UI with theme toggle
+
+---
+
+## Live Demo
+[https://gemini-clone-delta-six.vercel.app/](https://gemini-clone-delta-six.vercel.app/)
+
+---
+
+## Setup and Run Instructions
 
 ### Prerequisites
 - Node.js (v18+ recommended)
 - npm (v9+ recommended)
 
 ### Installation
-
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/hemraj-007/gemini-clone
@@ -55,20 +66,63 @@ The output will be in the `dist/` directory.
 npm run lint
 ```
 
-## Usage Overview
+---
 
-1. **Login**: Enter your phone number and select your country code. Submit to receive a simulated OTP.
-2. **OTP Verification**: Enter the OTP (any 4+ digit number will work for demo). Upon verification, you'll be redirected to the dashboard.
-3. **Dashboard**: View, search, create, or delete chatrooms.
-4. **Chatroom**: Send messages (text or images). The app simulates AI responses. Messages and chatrooms persist locally.
+## Folder/Component Structure
 
+- **src/pages/**
+  - `Login.tsx`: Phone login and OTP entry page
+  - `Otp.tsx`: OTP verification page
+  - `Dashboard.tsx`: Chatroom dashboard (list, search, create, delete)
+  - `Chatroom.tsx`: Chat interface for a specific chatroom
+- **src/components/**
+  - `PhoneLoginForm.tsx`: Phone number input and validation
+  - `OtpVerificationForm.tsx`: OTP input and validation
+  - `ThemeToggle.tsx`: Light/dark mode toggle
+  - `MessageSkeleton.tsx`, `MessageSkeleton1.tsx`: Loading skeletons
+  - **chat/**: Chatroom UI components
+    - `MessageInput.tsx`: Message input (text/image)
+    - `MessageList.tsx`: List of messages in a chatroom
+    - `MessageBubble.tsx`: Individual message display
+    - `TypingIndicator.tsx`: Shows when AI is “typing”
+    - `ChatHeader.tsx`: Chatroom header/navigation
+  - **dashboard/**: Dashboard UI components
+    - `ChatroomList.tsx`: List/search chatrooms
+    - `CreateChatroomModal.tsx`: Create new chatroom
+    - `ChatroomCard.tsx`: Individual chatroom card
+    - `SearchInput.tsx`: Search bar for chatrooms
+  - **auth/**: (Alternate location for auth components)
+- **src/store/**
+  - `authStore.ts`: Auth state (phone, country code)
+  - `chatroomStore.ts`: Chatroom state (CRUD, search)
+  - `messageStore.ts`: Message state (per chatroom)
+  - `themeStore.ts`: Theme state (light/dark)
+- **src/assets/**: Static assets
 
-## Project Structure
+---
 
-- `src/pages/` — Main pages (Login, OTP, Dashboard, Chatroom)
-- `src/components/` — Reusable UI components (chat, dashboard, auth, etc.)
-- `src/store/` — Zustand stores for auth, chatrooms, messages, and theme
-- `src/assets/` — Static assets
+## Advanced Features
+
+### Form Validation
+- **Where:** `PhoneLoginForm.tsx`, `OtpVerificationForm.tsx`
+- **How:**
+  - Uses `react-hook-form` for form state management.
+  - Uses `zod` for schema-based validation (e.g., phone number length, required country code).
+  - Validation errors are shown inline.
+
+### Simulated AI Response
+- When a user sends a message, a simulated AI (“Gemini”) responds after a 1-second delay (see `simulateAIResponse` in `Chatroom.tsx`).
+
+---
+
+## Feature Implementation Table
+
+| Feature         | Implementation Details                                                                 |
+|-----------------|---------------------------------------------------------------------------------------|
+| Form Validation | `react-hook-form` + `zod` in login/OTP forms                                          |
+| Simulated AI    | 1-second delayed response in chatroom                                                 |
+
+---
 
 ## Notes
 - **No backend/API**: All data is stored in the browser (localStorage). OTP and AI chat are simulated for demo purposes.
