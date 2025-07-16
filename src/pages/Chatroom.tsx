@@ -53,13 +53,9 @@ const Chatroom: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-gray-100 p-4">
       <ChatHeader roomId={id} />
 
-      <div className="flex-1 overflow-y-auto mb-2">
-        {/* pass chatroomId + scrollRef, not messages */}
-        <MessageList chatroomId={id} scrollRef={scrollRef} />
-
+      <div className="flex-1 overflow-y-auto mb-2 flex flex-col gap-3 px-2 sm:px-4 py-2 max-h-[75vh] custom-scroll">
+        <MessageList chatroomId={id} />
         {typing && <TypingIndicator />}
-
-        {/* this extra div is what we scroll into view */}
         <div ref={scrollRef} />
       </div>
 
