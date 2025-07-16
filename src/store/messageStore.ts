@@ -1,11 +1,12 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-interface Message {
+export interface Message {
   id: string;
   sender: string;
   content: string;
   timestamp: string;
+  image?: string;
 }
 
 interface MessageStore {
